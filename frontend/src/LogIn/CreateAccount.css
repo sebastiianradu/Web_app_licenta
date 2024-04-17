@@ -1,0 +1,62 @@
+/* CreateAccount.css */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5; 
+  }
+  
+  .login-nume-firma-icon {
+    cursor: pointer;
+    margin: 0 auto; 
+  }
+  
+  .nume-firma-img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for the form */
+  }
+  
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] { /* Added input[type="text"] for first name and last name */
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Make sure padding does not affect the final width */
+  }
+  
+  .Create-Acc { /* Styling for the create account button */
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; /* Slightly different color for differentiation */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .Create-Acc:hover { /* Hover effect for create account button */
+    background-color: #0056b3;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  

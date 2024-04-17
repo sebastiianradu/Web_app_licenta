@@ -1,0 +1,43 @@
+.Barbati {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .Barbati-header {
+    text-align: center;
+  }
+  
+  .Barbati-content {
+    display: flex;
+    width: 100%;
+  }
+  
+  .Barbati-filters {
+    flex-basis: 20%;
+    padding-right: 20px;
+  }
+  
+  .filter-group h3 {
+    margin-bottom: 10px;
+  }
+  
+  .Barbati-filters select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .Barbati-articles {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .article-placeholder {
+    height: 200px;
+    background-color: grey;
+  }
+  
