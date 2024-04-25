@@ -1,8 +1,8 @@
 [
     {
       "id" : 1,
-      "title": "Adidasi 1",
-      "description": "descriere 1",
+      "title": "Adidasi Misto",
+      "description": "Super calitate n-o sa te mint!",
       "price": 99.99,
       "imageUrl": "https://contents.mediadecathlon.com/p2617670/k$9920a2027435166f5261dc522c1ea182/sq/incaltaminte-joasa-drumetie-in-natura-nh50-kaki-barbati.jpg?f=3000x3000",
       "category": "M",
@@ -11,8 +11,8 @@
 ,
     {
       "id" : 2,
-      "title": "Adidasi 2",
-      "description": "descriere 2",
+      "title": "Adidasi Cotofani",
+      "description": "Iti fura privirea si iti fut nevasta!",
       "price": 119.99,
       "imageUrl": "https://contents.mediadecathlon.com/p2588643/k$943d9eb37425a7e15d033906bf9e1a8c/sq/ghete-fotbal-100-turf-tf-negru-adulti.jpg?f=3000x3000",
       "category": "M",
@@ -21,8 +21,8 @@
     ,
     {
       "id" : 3,
-      "title": "Adidasi 3",
-      "description": "descriere 3",
+      "title": "Adidasi Cramponati",
+      "description": "Buni de spart capu!",
       "price": 199.99,
       "imageUrl": "https://contents.mediadecathlon.com/p2380446/k$88bbd05387f25c2ca0de3e0eda22192d/sq/ghete-fotbal-viralto-i-mgag-negru-rosu-adulti.jpg?f=3000x3000",
       "category": "K",
@@ -31,8 +31,8 @@
     ,
     {
       "id" : 4,
-      "title": "Adidasi 4",
-      "description": "descriere 4",
+      "title": "Adidasi Plimbareti",
+      "description": "Mersu pe jos face picioru frumos si pula mare!",
       "price": 79.99,
       "imageUrl": "https://contents.mediadecathlon.com/p2622871/k$5b2df3fcb693fbd93b5659ef7e96d24e/sq/ghete-fotbal-future-7-match-tf-puma-alb-adulti.jpg?f=3000x3000",
       "category": "K",
@@ -41,8 +41,8 @@
     ,
     {
       "id" : 5,
-      "title": "Adidasi 5!",
-      "description": "descriere 5",
+      "title": "Adidasi Omosecsuali!",
+      "description": "Nu mai am ce sa comentez!",
       "price": 69.99,
       "imageUrl": "https://contents.mediadecathlon.com/p2416495/k$42ffbb6dd26e25665fdcf0425799e3c4/sq/ghete-din-piele-futsal-eskudo-pro-202223-barbati.jpg?f=3000x3000",
       "category": "W",
@@ -51,8 +51,8 @@
     ,   
     {
       "id" : 6,
-      "title": "Adidasi 6",
-      "description": "descriere 6",
+      "title": "Adidasi de Ocazii!",
+      "description": "Buni de purtat la nunta lu ma-ta mare!",
       "price": 99.99,
       "imageUrl": "https://contents.mediadecathlon.com/p1569733/k$85d97db145c61db79c0bb0e502178509/sq/incaltaminte-drumetie-la-munte-crosslander-gri-barbati.jpg?f=3000x3000",
       "category": "W",

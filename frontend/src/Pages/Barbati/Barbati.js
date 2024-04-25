@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Barbati() {
   const [filters, setFilters] = useState({ type: '', priceRange: '' });
   const [articles, setArticles] = useState(Array(10).fill({})); // Simulate 10 placeholder articles
+  const [filteredArticles, setFilteredArticles] = useState([]);
 
   const navigate = useNavigate();
 
@@ -40,6 +41,30 @@ const handleAccountClick = () => {
   }
 };
 
+
+////////////////////////
+
+const filterArticles = () => {
+  let filtered = articles;
+
+  // Filter by type
+  if (filters.type !== '') {
+    filtered = filtered.filter(article => article.type === filters.type);
+  }
+
+  // Filter by price range
+  if (filters.priceRange !== '') {
+    const [minPrice, maxPrice] = filters.priceRange.split('-').map(Number);
+    filtered = filtered.filter(article => article.price >= minPrice && article.price <= maxPrice);
+  }
+
+  setFilteredArticles(filtered);
+};
+
+useEffect(() => {
+  filterArticles();
+}, [filters, articles]);
+
   return (
     <div class="Barbati-Page">
      <header className="App-header">
@@ -72,10 +97,9 @@ const handleAccountClick = () => {
              <h3>Tipuri de articole</h3>
              <select name="type" onChange={handleFilterChange}>
                <option value="">Toate</option>
-               <option value="t-shirts">Tricouri</option>
-               <option value="pants">Pantaloni</option>
-               <option value="shoes">Incaltaminte</option>
-               <option value="accessories">Accesorii</option>
+               <option value="Tricouri">Tricouri</option>
+               <option value="Pantaloni">Pantaloni</option>
+               <option value="Adidasi">Incaltaminte</option>
              </select>
            </div>
            <div className="filter-group">
@@ -90,14 +114,18 @@ const handleAccountClick = () => {
            </div>
          </aside>
          <main className="article-container">
-        {articles.map(article => (
-          <div key={article.id} className="article" onClick={() => navigate(`/article/${article.id}`)} style={{ cursor: 'pointer' }}>
-            <img src={article.imageUrl} alt={article.title} style={{ width: '150px', height: 'auto' }} />
-            <h3>{article.title}</h3>
-            <p>{article.description}</p>
-            <p>${article.price}</p>
-          </div>
-        ))}
+         {filteredArticles.length > 0 ? (
+                  filteredArticles.map(article => (
+                    <div key={article.id} className="article" onClick={() => navigate(`/article/${article.id}`)} style={{ cursor: 'pointer' }}>
+                      <img src={article.imageUrl} alt={article.title} style={{ width: '150px', height: 'auto' }} />
+                      <h3>{article.title}</h3>
+                      <p>{article.description}</p>
+                      <p>${article.price}</p>
+                    </div>
+                  ))
+                ) : (
+        <div className="no-articles-message">Nu exista articole in aceasta gama!</div>
+      )}
       </main>
        </div>
      </div>

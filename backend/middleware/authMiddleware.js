@@ -1,6 +1,7 @@
 // authMiddleware.js
 const bcrypt = require('bcrypt');
-const { User, ClothingArticle } = require('../models/userModel'); // Update the path as per your structure
+const { User, ClothingArticle } = require('../../backend/models/userModel'); // Update the path as per your structure
+
 
 const loginMiddleware = async (req, res, next) => {
     const { email, password } = req.body;
@@ -60,14 +61,15 @@ const createAccountMiddleware = async (req, res, next) => {
 const fs = require('fs').promises; // Use fs.promises for async/await support
 const path = require('path');
 
-async function addClothingArticle(title, description, price, imageUrl, category) {
+async function addClothingArticle(title, description, price, imageUrl, category, type) {
     try {
       const article = await ClothingArticle.create({
         title,
         description,
         price,
         imageUrl,
-        category
+        category,
+        type
       });
       console.log('Article added:', article.toJSON());
     } catch (error) {
@@ -82,7 +84,7 @@ async function addClothingArticle(title, description, price, imageUrl, category)
       const articles = JSON.parse(articlesData);
   
       for (const article of articles) {
-        await addClothingArticle(article.title, article.description, article.price, article.imageUrl, article.category);
+        await addClothingArticle(article.title, article.description, article.price, article.imageUrl, article.category, article.type);
       }
   
       console.log('All articles added.');

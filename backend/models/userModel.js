@@ -59,6 +59,10 @@ imageUrl: {
 category: {
   type: Sequelize.STRING,
   allowNull: false
+},
+type:{
+  type: Sequelize.STRING,
+  allowNull: false
 }
 });
 
@@ -68,7 +72,7 @@ const Basket = sequelize.define('Basket', {
     defaultValue: Sequelize.UUIDV4,
     primaryKey: true,
     allowNull: false
-  },
+  }
   // No need to define userId here; it will be added through the association
 });
 
@@ -86,6 +90,18 @@ const BasketItem = sequelize.define('BasketItem', {
     validate: {
       min: 1
     }
+  },
+  basketId: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    primaryKey: true,
+    allowNull: false
+  },
+  clothingArticleId: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    primaryKey: true,
+    allowNull: false
   }
 });
 
@@ -122,6 +138,7 @@ async function getUserDetailsById(userId) {
     throw error; // Rethrow or handle error as needed
   }
 }
+
 
 module.exports = { 
   initialize,

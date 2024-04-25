@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { loginMiddleware,createAccountMiddleware,verifyToken }  = require('../middleware/authMiddleware.js'); // Update the path as per your structure
-const { Basket, BasketItem, User, getUserDetailsById, ClothingArticle } = require('../models/userModel.js');
+const { Basket, BasketItem, User, getUserDetailsById, getBasketItemDetails, ClothingArticle } = require('../../backend/models/userModel.js');
 const router = express.Router();
 
 const secretKey = 'f3f9058acd9697628d66a9bca0ca05243151758d4e411a91b7c2230a94ec13fcde0281697aa4ce18a7d267542a924893dd4509cfb62c0905e5a67499ee2408c4';
@@ -132,52 +132,127 @@ router.post('/api/basket', verifyToken, async (req, res) => {
 
   try {
     // Find or create a basket for the user
-    const [basket, created] = await Basket.findOrCreate({ where: { userId } });
+    let basket = await Basket.findOne({ where: { userId } });
+    if (!basket) {
+      // Dacă nu există un coș pentru utilizator, creează-l
+      basket = await Basket.create({ userId });
+    }
 
-    // Add the article to the basket
+    // Adaugă articolul în coș
     const basketItem = await BasketItem.create({
       basketId: basket.id,
       clothingArticleId: articleId,
-      quantity
+      quantity: quantity
     });
 
-    res.status(201).json(basketItem);
-    console.log(basketItem);
+    res.json({
+      basketId: basket.id,
+      basketItemId: basketItem.id,
+      clothingArticleId: articleId,
+      quantity: quantity
+    });
+    console.log({
+      basketId: basket.id,
+      basketItemId: basketItem.id,
+      clothingArticleId: articleId,
+      quantity: quantity
+    });
   } catch (error) {
     console.error('Error adding item to basket:', error);
     res.status(500).json({ message: 'Error adding item to basket' });
   }
 });
 
-// Endpoint to retrieve the user's basket
+
 router.get('/api/basket', verifyToken, async (req, res) => {
   const userId = req.user.id;
 
   try {
-    const basket = await Basket.findOne({ where: { userId }, include: [{
-      model: BasketItem,
-      include: [{
-        model: ClothingArticle
-      }]
-    }] });
-
+    const basket = await Basket.findOne({ 
+      where: { userId }, 
+      include: [{ 
+        model: BasketItem, 
+        include: [{ 
+          model: ClothingArticle 
+        }] 
+      }] 
+    });
 
     if (!basket) {
       return res.status(404).json({ message: 'Basket not found' });
     }
-    
-    const formattedItems = basket && basket.BasketItems ? basket.BasketItems.map(item => {
-      return {
-        id: item.id,
-        quantity: item.quantity,
-        ClothingArticle: item.ClothingArticle // Ensure this structure matches what your front-end expects
-      };
-    }) : [];
-    res.json(formattedItems);
 
+    // Check if basket is not null and has items
+    if (basket.BasketItems && basket.BasketItems.length > 0) {
+      const formattedItems = basket.BasketItems.map(item => {
+        if (item && item.ClothingArticle) { // Check if item and item.ClothingArticle are not null
+          return {
+            id: item.id,
+            quantity: item.quantity,
+            clothingArticle: {
+              id: item.ClothingArticle.id,
+              title: item.ClothingArticle.title,
+              price: item.ClothingArticle.price,
+              imageUrl: item.ClothingArticle.imageUrl,
+            }
+          };
+        } else {
+          return null; // Return null for invalid items
+        }
+      }).filter(item => item !== null); // Filter out null items
+      res.json(formattedItems);
+      console.log(formattedItems);
+    } else {
+      res.status(404).json({ message: 'Basket is empty' });
+    }
+    
   } catch (error) {
     console.error('Error retrieving basket:', error);
     res.status(500).json({ message: 'Error retrieving basket' });
+  }
+});
+
+router.delete('/api/basket', verifyToken, async (req, res) => {
+  const userId = req.user.id;
+  const { itemId } = req.body; // Se așteaptă ID-ul elementului care trebuie șters în corpul cererii DELETE
+
+  try {
+    // Caută coșul de cumpărături al utilizatorului
+    const basket = await Basket.findOne({ where: { userId } });
+
+    if (!basket) {
+      return res.status(404).json({ message: 'Basket not found' });
+    }
+
+    // Șterge elementul din coșul de cumpărături
+    await BasketItem.destroy({ where: { id: itemId, BasketId: basket.id } });
+
+    // Returnează un răspuns de succes
+    res.status(200).json({ message: 'Item removed from basket successfully' });
+  } catch (error) {
+    console.error('Error removing item from basket:', error);
+    res.status(500).json({ message: 'Error removing item from basket' });
+  }
+});
+
+
+router.get('/api/search', async (req, res) => {
+  try {
+      const searchTerm = req.query.term;
+
+      // Read the contents of the articles.json file
+      const jsonData = await fs.readFile('articles.json', 'utf8');
+      const articles = JSON.parse(jsonData);
+
+      // Search for articles based on the search term
+      const filteredArticles = articles.filter(article =>
+          article.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      res.json(filteredArticles);
+  } catch (error) {
+      console.error('Error searching articles:', error);
+      res.status(500).json({ message: 'Error searching articles' });
   }
 });
 

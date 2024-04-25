@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Basket.css';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 
 
 function Basket() {
+  // const { itemId } = useParams();
   const [basketItems, setBasketItems] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
+  const [isLoading, setIsLoading] = useState(true); // State to manage loading state
 
   const navigate = useNavigate();
 
@@ -17,21 +21,32 @@ function Basket() {
         const token = localStorage.getItem('token');
         if (!token) {
           console.error('No token found. User must be logged in to fetch basket items.');
+          setIsLoading(false); // Stop loading
           return;
         }
-  
-        const response = await axios.get('http://localhost:3001/api/basket', {
+
+        const response = await axios.get(`http://localhost:3001/api/basket`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
+        if (response.data.length === 0) {
+          console.log('The basket is empty.');
+          setIsLoading(false); // Stop loading
+          return;
+        }
+
         console.log('Basket items fetched:', response.data); // Debugging line
         setBasketItems(response.data);
+        setIsLoading(false); // Stop loading
       } catch (error) {
         console.error('Error fetching basket items:', error);
+        setIsLoading(false); // Stop loading
       }
     };
-  
+
     fetchBasketItems();
   }, []);
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
@@ -47,8 +62,47 @@ function Basket() {
     }
   };
   
+  function calculateTotal(basketItems) {
+    let total = 0;
+    for (const item of basketItems) {
+      total += parseFloat(item.clothingArticle.price) * item.quantity;
+    }
+    return total;
+  }
+  
+  // Calcularea totalului
+  const total = calculateTotal(basketItems);
 
-  const total = basketItems.reduce((acc, item) => acc + parseFloat(item.ClothingArticle.price), 0);
+  // Afișarea mesajului de coș gol
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+///////////////stergere/////////////
+
+const handleRemoveItem = async (itemId) => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('No token found. User must be logged in to delete basket items.');
+      return;
+    }
+
+    await axios.delete(`http://localhost:3001/api/basket`, {
+      headers: { Authorization: `Bearer ${token}` },
+      data: { itemId } // Trimitem ID-ul elementului în corpul cererii DELETE
+    });
+
+    // Actualizăm lista de articole din coș după ștergere
+    const updatedBasketItems = basketItems.filter(item => item.id !== itemId);
+    setBasketItems(updatedBasketItems);
+  } catch (error) {
+    console.error('Error deleting basket item:', error);
+  }
+};
+
+
+///////////////////////////////////////
+
 
   return (
     <div className="App">
@@ -76,15 +130,22 @@ function Basket() {
     <div className="basket-container">
       <div className="basket-items">
         <h2>Coș de cumpărături:</h2>
-        {basketItems.map((item, index) => (
-          <div className="basket-item" key={index}>
-            <img src={item.ClothingArticle.imageUrl} alt={item.ClothingArticle.title} className="basket-item-image" />
-            <div className="basket-item-details">
-              <p className="basket-item-title">{item.ClothingArticle.title}</p>
-              <p className="basket-item-price">${parseFloat(item.ClothingArticle.price).toFixed(2)}</p>
-            </div>
-          </div>
-        ))}
+        {basketItems.length > 0 ? (
+  basketItems.map((item, index) => (
+    <div className="basket-item" key={index}>
+      <img src={item.clothingArticle.imageUrl} alt={item.clothingArticle.title} className="basket-item-image" />
+      <div className="basket-item-details">
+        <p className="basket-item-title">{item.clothingArticle.title}</p>
+        <p className="basket-item-price">${parseFloat(item.clothingArticle.price).toFixed(2)}</p>
+        <p className="basket-item-quantity">Quantity: {item.quantity}</p>
+        <p className="basket-item-size">Size: {item.size}</p>
+        <button className="remove-item-button" onClick={() => handleRemoveItem(item.id)}>Șterge</button>
+      </div>
+    </div>
+  ))
+) : (
+  <p>Coșul tău este gol.</p>
+)}
       </div>
       <div className="basket-summary">
         <h2>Sumar comandă:</h2>

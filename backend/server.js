@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { ClothingArticle, initialize, sequelize } = require('../Backend/models/userModel.js');// const app = express();
+const { ClothingArticle, initialize, sequelize } = require('../backend/models/userModel.js');// const app = express();
 const router = require('../Backend/routes/routes.js');
 const { addAllClothingArticles } = require('../Backend/middleware/authMiddleware.js')
 
@@ -62,7 +62,7 @@ start();
 async function deleteRows() {
   try {
     // This will delete the first 3 rows based on your model's primaryKey (usually `id`)
-    const rowsToDelete = await ClothingArticle.findAll({ order: [['id', 'ASC']], limit: 24 });
+    const rowsToDelete = await ClothingArticle.findAll({ order: [['id', 'ASC']], limit: 6 });
     
     for (const row of rowsToDelete) {
       await row.destroy();

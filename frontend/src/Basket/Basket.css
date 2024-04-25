@@ -59,3 +59,7 @@
     background-color: #45a049; /* Darker shade of green on hover */
   }
   
+  .basket-item-image {
+    width: 150px; /* Setăm lățimea imaginii la 200px */
+  }
+  
