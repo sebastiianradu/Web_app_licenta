@@ -10,6 +10,8 @@ import Account from '../Account/Account.js';
 import ProtectedRoute from '../ProtectedRoute.js';
 import Article from '../ArticlePage/Article.js';
 import Basket from '../Basket/Basket.js';
+import Comanda from '../Comanda/OrderPage.js';
+import FinalOrder from '../FinalOrder/FinalOrder.js';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
       <Route path="/copii" element={<Copii />} />
       <Route path="/article/:id" element={<Article />} />
       <Route path="/basket" element={<Basket />} />
+      <Route path="/orders" element={<Comanda />} />
+      <Route path="/final-order" element={<FinalOrder />} />
     </Routes>
   );
 }

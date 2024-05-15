@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 function App() {
   const [articles, setArticles] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   const navigate = useNavigate();
 
@@ -33,6 +35,14 @@ const handleAccountClick = () => {
   }
 };
 
+////////////////////////////////////////Search bar////////////////////////////////////////
+
+const handleSearch = (event) => {
+  setSearchTerm(event.target.value);
+};
+
+
+
   return (
     <div className="App">
      <header className="App-header">
@@ -51,13 +61,18 @@ const handleAccountClick = () => {
     <img src="/Firma.jpg" className="nume-firma-img" />
   </div>
 
-  <input type="text" placeholder="Search..." />
+  <input type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
   <button className="Account" onClick={handleAccountClick}>Contul Meu</button>
   <button className="My-Basket" onClick={() => navigate('/basket')}>Cosul Meu</button>
 </header>
 
       <main className="article-container">
-        {articles.map(article => (
+        {articles
+        .filter(article =>
+          article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          article.description.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .map(article => (
           <div key={article.id} className="Main-article" onClick={() => navigate(`/article/${article.id}`)} style={{ cursor: 'pointer' }}>
             <img src={article.imageUrl} alt={article.title} style={{ width: '250px', height: 'auto' }} />
             <h3>{article.title}</h3>

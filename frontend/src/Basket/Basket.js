@@ -150,7 +150,7 @@ const handleRemoveItem = async (itemId) => {
       <div className="basket-summary">
         <h2>Sumar comandă:</h2>
         <p>Total: ${total.toFixed(2)}</p>
-        <button className="basket-checkout-button">Către livrare</button>
+        <button className="basket-checkout-button" onClick={() => navigate('/orders')}>Către livrare</button>
       </div>
     </div>
     </div>

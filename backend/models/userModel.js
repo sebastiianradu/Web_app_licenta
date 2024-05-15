@@ -105,6 +105,35 @@ const BasketItem = sequelize.define('BasketItem', {
   }
 });
 
+const Order = sequelize.define('Order', {
+  id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    primaryKey: true,
+    allowNull: false
+  },
+  userId: {
+    type: Sequelize.UUID,
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'id'
+    }
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  phoneNumber: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  paymentMethod: {
+    type: Sequelize.ENUM('card', 'cash'),
+    allowNull: false
+  }
+});
+
 // Relationships
 User.hasOne(Basket);
 Basket.belongsTo(User);
@@ -114,6 +143,12 @@ BasketItem.belongsTo(Basket);
 
 ClothingArticle.hasMany(BasketItem);
 BasketItem.belongsTo(ClothingArticle);
+
+User.hasMany(Order);
+Order.belongsTo(User);
+
+Order.belongsTo(Basket);
+Basket.hasOne(Order);
 
 async function initialize(){
     await sequelize.authenticate();
@@ -147,5 +182,6 @@ module.exports = {
   BasketItem,
   Basket,
   getUserDetailsById,
+  Order,
   sequelize
 };

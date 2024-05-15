@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { loginMiddleware,createAccountMiddleware,verifyToken }  = require('../middleware/authMiddleware.js'); // Update the path as per your structure
-const { Basket, BasketItem, User, getUserDetailsById, getBasketItemDetails, ClothingArticle } = require('../../backend/models/userModel.js');
+const { Basket, BasketItem, Order, User, getUserDetailsById, getBasketItemDetails, ClothingArticle } = require('../../backend/models/userModel.js');
 const router = express.Router();
 
 const secretKey = 'f3f9058acd9697628d66a9bca0ca05243151758d4e411a91b7c2230a94ec13fcde0281697aa4ce18a7d267542a924893dd4509cfb62c0905e5a67499ee2408c4';
@@ -253,6 +253,31 @@ router.get('/api/search', async (req, res) => {
   } catch (error) {
       console.error('Error searching articles:', error);
       res.status(500).json({ message: 'Error searching articles' });
+  }
+});
+
+////////////////////////////// ORDER //////////////////////////////////////
+
+// Definim ruta pentru pagina de comandă
+router.post('/api/orders', async (req, res) => {
+  try {
+    // Extragem datele necesare din corpul cererii
+    const { userId, address, phoneNumber, paymentMethod } = req.body;
+
+    // Creăm o nouă înregistrare în tabelul Orders
+    const newOrder = await Order.create({
+      userId: userId,
+      address: address,
+      phoneNumber: phoneNumber,
+      paymentMethod: paymentMethod
+    });
+
+    // Returnăm un răspuns de succes cu detaliile comenzii create
+    res.status(201).json({ message: 'Order placed successfully', order: newOrder });
+  } catch (error) {
+    // Dacă apar erori, returnăm un mesaj de eroare și statusul corespunzător
+    console.error('Error placing order:', error);
+    res.status(500).json({ message: 'Error placing order' });
   }
 });
 
