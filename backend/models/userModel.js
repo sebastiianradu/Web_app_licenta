@@ -112,14 +112,6 @@ const Order = sequelize.define('Order', {
     primaryKey: true,
     allowNull: false
   },
-  userId: {
-    type: Sequelize.UUID,
-    allowNull: false,
-    references: {
-      model: User,
-      key: 'id'
-    }
-  },
   address: {
     type: Sequelize.STRING,
     allowNull: false

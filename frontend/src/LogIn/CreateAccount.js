@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../AxiosInstance';
+import './CreateAccount.css';
 
 function CreateAccountPage() {
   const [firstName, setFirstName] = useState('');
@@ -45,6 +46,7 @@ function CreateAccountPage() {
       <div className="create-account-container">
         <form onSubmit={handleSubmit}> {/* Updated to use handleSubmit */}
           <h2>Create New Account</h2>
+          <div className="text">
           <input
             type="text"
             placeholder="First Name"
@@ -72,7 +74,7 @@ function CreateAccountPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          />
+          /></div>
           <button className='Create-Acc' type="submit">Create Account</button>
         </form>
       </div>

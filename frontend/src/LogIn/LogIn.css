@@ -33,7 +33,7 @@
   }
   
   input[type="email"],
-  input[type="password"] {
+  input[type="password"]{
     width: 80%;
     padding: 10px;
     margin: 10px 0;
@@ -42,7 +42,7 @@
     box-sizing: border-box; /* Make sure padding does not affect the final width */
   }
   
-.LogIn, .Create-Acc{
+  .buttons button{
     width: 80%;
     padding: 10px;
     margin: 10px 0;

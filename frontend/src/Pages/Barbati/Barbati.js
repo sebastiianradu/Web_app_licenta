@@ -114,6 +114,7 @@ useEffect(() => {
            </div>
          </aside>
          <main className="article-container">
+          <div className="Barbati-articles">
          {filteredArticles.length > 0 ? (
                   filteredArticles.map(article => (
                     <div key={article.id} className="article" onClick={() => navigate(`/article/${article.id}`)} style={{ cursor: 'pointer' }}>
@@ -125,7 +126,7 @@ useEffect(() => {
                   ))
                 ) : (
         <div className="no-articles-message">Nu exista articole in aceasta gama!</div>
-      )}
+      )}</div>
       </main>
        </div>
      </div>

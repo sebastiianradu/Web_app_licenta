@@ -261,12 +261,18 @@ router.get('/api/search', async (req, res) => {
 // Definim ruta pentru pagina de comandă
 router.post('/api/orders', async (req, res) => {
   try {
+
     // Extragem datele necesare din corpul cererii
-    const { userId, address, phoneNumber, paymentMethod } = req.body;
+    const { address, phoneNumber, paymentMethod } = req.body;
+
+    console.log('Received order data:', {
+      address: address,
+      phoneNumber: phoneNumber,
+      paymentMethod: paymentMethod
+    });
 
     // Creăm o nouă înregistrare în tabelul Orders
     const newOrder = await Order.create({
-      userId: userId,
       address: address,
       phoneNumber: phoneNumber,
       paymentMethod: paymentMethod
@@ -276,10 +282,11 @@ router.post('/api/orders', async (req, res) => {
     res.status(201).json({ message: 'Order placed successfully', order: newOrder });
   } catch (error) {
     // Dacă apar erori, returnăm un mesaj de eroare și statusul corespunzător
-    console.error('Error placing order:', error);
-    res.status(500).json({ message: 'Error placing order' });
+    console.error('Error placing order:', error.message);
+    res.status(500).json({ message: 'Error placing order', error: error.message });
   }
 });
+
 
 
 

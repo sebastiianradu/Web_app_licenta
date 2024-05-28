@@ -63,8 +63,9 @@ function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <div class="buttons">
         <button className='LogIn' type="submit">Login</button>
-        <button className='Create-Acc'type="button" onClick={handleCreateAccount}>Create Account</button> {/* Add this line */}
+        <button className='Create-Acc'type="button" onClick={handleCreateAccount}>Create Account</button> {/* Add this line */}</div>
       </form>
     </div>
     </div>

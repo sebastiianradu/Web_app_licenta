@@ -61,7 +61,7 @@ const handleSearch = (event) => {
     <img src="/Firma.jpg" className="nume-firma-img" />
   </div>
 
-  <input type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
+  <input className="text" type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
   <button className="Account" onClick={handleAccountClick}>Contul Meu</button>
   <button className="My-Basket" onClick={() => navigate('/basket')}>Cosul Meu</button>
 </header>

@@ -28,19 +28,19 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for the form */
   }
-  
-  input[type="email"],
-  input[type="password"],
-  input[type="text"] { /* Added input[type="text"] for first name and last name */
+
+  .text input[type="email"],
+  input[type="password"],input[type="text"] { /* Added input[type="text"] for first name and last name */
     width: 80%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px 0px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box; /* Make sure padding does not affect the final width */
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease; /* Make sure padding does not affect the final width */
   }
   
-  .Create-Acc { /* Styling for the create account button */
+  .Create-Acc button { /* Styling for the create account button */
     width: 80%;
     padding: 10px;
     margin: 10px 0;
@@ -53,7 +53,7 @@
   }
   
   .Create-Acc:hover { /* Hover effect for create account button */
-    background-color: #0056b3;
+    background-color: darkgray;
   }
   
   h2 {
