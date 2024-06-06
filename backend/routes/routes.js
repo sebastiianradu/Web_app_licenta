@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const { loginMiddleware,createAccountMiddleware,verifyToken }  = require('../middleware/authMiddleware.js'); // Update the path as per your structure
 const { Basket, BasketItem, Order, User, getUserDetailsById, getBasketItemDetails, ClothingArticle } = require('../../backend/models/userModel.js');
 const router = express.Router();
+const fs = require('fs');
+const PDFDocument = require('pdfkit');
+const path = require('path');
 
 const secretKey = 'f3f9058acd9697628d66a9bca0ca05243151758d4e411a91b7c2230a94ec13fcde0281697aa4ce18a7d267542a924893dd4509cfb62c0905e5a67499ee2408c4';
 
@@ -128,7 +131,7 @@ router.get('/api/articles/:id', async (req, res) => {
 
 router.post('/api/basket', verifyToken, async (req, res) => {
   const userId = req.user.id;
-  const { articleId, quantity } = req.body;
+  const { articleId, quantity, size} = req.body;
 
   try {
     // Find or create a basket for the user
@@ -142,20 +145,23 @@ router.post('/api/basket', verifyToken, async (req, res) => {
     const basketItem = await BasketItem.create({
       basketId: basket.id,
       clothingArticleId: articleId,
-      quantity: quantity
+      quantity: quantity,
+      size: size
     });
 
     res.json({
       basketId: basket.id,
       basketItemId: basketItem.id,
       clothingArticleId: articleId,
-      quantity: quantity
+      quantity: quantity,
+      size: size
     });
     console.log({
       basketId: basket.id,
       basketItemId: basketItem.id,
       clothingArticleId: articleId,
-      quantity: quantity
+      quantity: quantity,
+      size: size
     });
   } catch (error) {
     console.error('Error adding item to basket:', error);
@@ -194,6 +200,7 @@ router.get('/api/basket', verifyToken, async (req, res) => {
               title: item.ClothingArticle.title,
               price: item.ClothingArticle.price,
               imageUrl: item.ClothingArticle.imageUrl,
+              sizes: item.size
             }
           };
         } else {
@@ -287,7 +294,94 @@ router.post('/api/orders', async (req, res) => {
   }
 });
 
+//////////////////////////// Endpoint to clear the entire basket ////////////////////////////
 
 
+router.delete('/api/basket/clear', verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const basket = await Basket.findOne({ where: { userId } });
+
+    if (!basket) {
+      return res.status(404).json({ message: 'Basket not found' });
+    }
+
+    await BasketItem.destroy({ where: { basketId: basket.id } });
+    res.status(200).json({ message: 'Basket cleared successfully' });
+  } catch (error) {
+    console.error('Error clearing basket:', error);
+    res.status(500).json({ message: 'Error clearing basket' });
+  }
+});
+
+////////////////////////// PDF ///////////////////////////
+
+// Endpoint to generate PDF with order details
+router.get('/api/pdf', verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    
+    const user = await User.findByPk(userId, {
+      include: {
+        model: Basket,
+        include: {
+          model: BasketItem,
+          include: [ClothingArticle]
+        }
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Check if the directory exists, if not, create it
+    const pdfDir = path.join(__dirname, '..', 'pdfs');
+    if (!fs.existsSync(pdfDir)) {
+      fs.mkdirSync(pdfDir);
+      console.log(`Directory ${pdfDir} created.`);
+    }
+
+    const filePath = path.join(pdfDir, `user-${userId}-order.pdf`);
+    const doc = new PDFDocument();
+
+    doc.pipe(fs.createWriteStream(filePath));
+
+    doc.fontSize(25).text('Order Details', { align: 'center' });
+    doc.text(`Name: ${user.firstName} ${user.lastName}`);
+    doc.text(`Email: ${user.email}`);
+    doc.text(`Address: ${user.address}`);
+    doc.text(`Phone Number: ${user.phoneNumber}`);
+    doc.moveDown();
+
+    if (user.Basket && user.Basket.BasketItems.length > 0) {
+      doc.fontSize(18).text('Items:', { underline: true });
+      user.Basket.BasketItems.forEach(item => {
+        doc.text(`- ${item.ClothingArticle.title} (Quantity: ${item.quantity}, Size: ${item.size}, Price: $${item.ClothingArticle.price})`);
+      });
+    } else {
+      doc.text('No items in the basket.');
+    }
+
+    doc.end();
+    console.log(`PDF created at ${filePath}`);
+
+    // Add a delay to ensure the file is written before attempting to download
+    setTimeout(() => {
+      res.download(filePath, `user-${userId}-order.pdf`, (err) => {
+        if (err) {
+          console.error('Error downloading the PDF:', err);
+          res.status(500).json({ message: 'Error downloading the PDF' });
+        } else {
+          fs.unlinkSync(filePath); // Delete the file after download
+          console.log(`PDF ${filePath} deleted after download.`);
+        }
+      });
+    }, 2000); // 2 seconds delay
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+    res.status(500).json({ message: 'Error generating PDF' });
+  }
+});
 
 module.exports = router;

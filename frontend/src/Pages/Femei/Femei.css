@@ -1,43 +1,94 @@
+/* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  color: #333;
+}
+
 .Femei {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .Femei-header {
-    text-align: center;
-  }
-  
-  .Femei-content {
-    display: flex;
-    width: 100%;
-  }
-  
-  .Femei-filters {
-    flex-basis: 20%;
-    padding-right: 20px;
-  }
-  
-  .filter-group h3 {
-    margin-bottom: 10px;
-  }
-  
-  .Femei-filters select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-  }
-  
-  .Femei-articles {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-  }
-  
-  .article-placeholder {
-    height: 200px;
-    background-color: grey;
-  }
-  
+  text-align: center;
+  padding: 20px;
+}
+
+/* Header Styles */
+.Femei-header {
+  background-color: #fff; /* Schimbăm fundalul la alb */
+  padding: 20px;
+  color: black; /* Schimbăm culoarea textului la negru */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none; /* Eliminăm orice bordură */
+}
+
+.Femei-header h1 {
+  color: black; /* Schimbăm culoarea textului la negru */
+}
+
+.Femei-content {
+  display: flex;
+  width: 100%;
+}
+
+.Femei-filters {
+  flex-basis: 20%;
+  padding-right: 20px;
+  text-align: left; /* Asigurăm că textul din filtre este aliniat la stânga */
+}
+
+.filter-group h3 {
+  margin-bottom: 10px;
+}
+
+.Femei-filters select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+
+/* Main Article Container */
+.article-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Ajustăm articolele să înceapă din stânga */
+  padding: 20px;
+  flex-basis: 80%; /* Asigurăm că articolele ocupă spațiul rămas */
+}
+
+.Femei-articles {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1 1 calc(25% - 40px); /* Ajustare pentru 4 articole pe rând */
+  max-width: calc(25% - 40px); /* Ajustare pentru 4 articole pe rând */
+  box-sizing: border-box;
+}
+
+.Femei-articles:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.Femei-articles img {
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+.Femei-articles h3 {
+  color: #333;
+}
+
+.Femei-articles p {
+  color: #666;
+}
+
+.Femei-articles p:last-of-type {
+  font-weight: bold;
+  color: #333;
+}

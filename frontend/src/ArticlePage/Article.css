@@ -1,54 +1,121 @@
 /* Article.css */
 
 .menu-bar {
-    background-color: grey;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .article-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f5f5f5; /* light grey */
-  }
-  
-  .article-content {
-    display: flex;
-    background-color: white;
-    border: 1px solid #ddd; /* light grey border */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
-  }
-  
-  .article-image img {
-    max-width: 500px;
-    height: auto;
-    border-right: 1px solid #ddd; /* light grey border */
-  }
-  
-  .article-info {
-    padding: 20px;
-  }
-  
-  .article-price {
-    color: grey;
-    margin: 10px 0;
-  }
-  
-  .add-button {
-    background-color: grey;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-button:hover {
-    background-color: darkgrey;
-  }
-  
+  background-color: grey;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.article-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5; /* light grey */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.article-content {
+  display: flex;
+  background-color: white;
+  border: 1px solid #ddd; /* light grey border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  width: 90%; /* Make the content width smaller */
+  max-width: 1200px; /* Limit the max width */
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.article-image img {
+  max-width: 500px;
+  height: auto;
+  border-right: 1px solid #ddd; /* light grey border */
+}
+
+.article-info {
+  padding: 20px;
+  flex: 1; /* Take available space */
+}
+
+.article-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.article-price {
+  color: grey;
+  margin: 10px 0;
+}
+
+.quantity-and-size {
+  display: flex;
+  justify-content: center; /* Center the items horizontally */
+  align-items: center; /* Center the items vertically */
+  margin: 20px 0;
+  gap: 20px; /* Add space between quantity and size selection */
+}
+
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-button {
+  background-color: #ddd;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.quantity-value {
+  margin: 0 10px;
+}
+
+.size-selection {
+  display: flex;
+  align-items: center;
+}
+
+.size-selection label {
+  margin-right: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  width: 100%; /* Take full width of the container */
+}
+
+.add-button {
+  background-color: grey;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: darkgrey;
+}
+
+.additional-info {
+  width: 90%; /* Match the article content width */
+  max-width: 1200px; /* Limit the max width */
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.additional-info h2 {
+  margin-top: 0;
+}
+
+.additional-info p {
+  margin-bottom: 10px;
+}

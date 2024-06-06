@@ -1,7 +1,7 @@
-const sequelize = require('../config/database.js')
+const sequelize = require('../config/database.js');
 const { Sequelize } = require('sequelize');
 
-const User = sequelize.define('user',{
+const User = sequelize.define('user', {
   id: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV4,
@@ -30,40 +30,51 @@ const User = sequelize.define('user',{
   }
 });
 
-const ClothingArticle = sequelize.define('ClothingArticle', { 
+const ClothingArticle = sequelize.define('ClothingArticle', {
   id: {
-  type: Sequelize.UUID,
-  defaultValue: Sequelize.UUIDV4,
-  primaryKey: true,
-  allowNull: false
-},
-title: {
-  type: Sequelize.STRING,
-  allowNull: false
-},
-description: {
-  type: Sequelize.TEXT,
-  allowNull: false
-},
-price: {
-  type: Sequelize.DECIMAL(10, 2),
-  allowNull: false
-},
-imageUrl: {
-  type: Sequelize.STRING,
-  allowNull: false,
-  validate: {
-    isUrl: true // This validates the imageUrl field to ensure it contains a valid URL
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    primaryKey: true,
+    allowNull: false
+  },
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  price: {
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isUrl: true // This validates the imageUrl field to ensure it contains a valid URL
+    }
+  },
+  category: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  type: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  sizes: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+    get() {
+      const rawValue = this.getDataValue('sizes');
+      return rawValue ? JSON.parse(rawValue) : null;
+    },
+    set(value) {
+      this.setDataValue('sizes', JSON.stringify(value));
+    }
   }
-},
-category: {
-  type: Sequelize.STRING,
-  allowNull: false
-},
-type:{
-  type: Sequelize.STRING,
-  allowNull: false
-}
 });
 
 const Basket = sequelize.define('Basket', {
@@ -73,7 +84,6 @@ const Basket = sequelize.define('Basket', {
     primaryKey: true,
     allowNull: false
   }
-  // No need to define userId here; it will be added through the association
 });
 
 const BasketItem = sequelize.define('BasketItem', {
@@ -93,15 +103,23 @@ const BasketItem = sequelize.define('BasketItem', {
   },
   basketId: {
     type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    primaryKey: true,
     allowNull: false
   },
   clothingArticleId: {
     type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    primaryKey: true,
     allowNull: false
+  },
+  size: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  orderId: {  // Adăugat coloana orderId
+    type: Sequelize.UUID,
+    allowNull: true,
+    references: {
+      model: 'Orders',
+      key: 'id'
+    }
   }
 });
 
@@ -139,12 +157,12 @@ BasketItem.belongsTo(ClothingArticle);
 User.hasMany(Order);
 Order.belongsTo(User);
 
-Order.belongsTo(Basket);
-Basket.hasOne(Order);
+Order.hasMany(BasketItem); // Order are mai multe BasketItems
+BasketItem.belongsTo(Order); // BasketItem aparține unui Order
 
-async function initialize(){
-    await sequelize.authenticate();
-    await sequelize.sync();
+async function initialize() {
+  await sequelize.authenticate();
+  await sequelize.sync();
 }
 
 async function getUserDetailsById(userId) {
@@ -166,8 +184,7 @@ async function getUserDetailsById(userId) {
   }
 }
 
-
-module.exports = { 
+module.exports = {
   initialize,
   User,
   ClothingArticle,

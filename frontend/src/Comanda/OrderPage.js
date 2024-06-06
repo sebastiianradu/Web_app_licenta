@@ -41,6 +41,11 @@ function OrderPage() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
+      // Clear the basket after placing the order
+      await axios.delete('http://localhost:3001/api/basket/clear', 
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
       alert("Order placed successfully!");
       navigate('/final-order');
     } catch (error) {

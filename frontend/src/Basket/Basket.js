@@ -142,7 +142,7 @@ function Basket() {
                   <p className="basket-item-title">{item.clothingArticle.title}</p>
                   <p className="basket-item-price">${parseFloat(item.clothingArticle.price).toFixed(2)}</p>
                   <p className="basket-item-quantity">Quantity: {item.quantity}</p>
-                  <p className="basket-item-size">Size: {item.size}</p>
+                  <p className="basket-item-size">Size: {item.clothingArticle.sizes}</p>
                   <button className="remove-item-button" onClick={() => handleRemoveItem(item.id)}>Șterge</button>
                 </div>
               </div>
