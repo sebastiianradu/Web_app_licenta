@@ -35,7 +35,7 @@ function FinalOrderPage() {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        alert('Please log in to download the PDF.');
+        alert('Va rugam conectati-va pentru a descarca PDF-ul');
         navigate('/login');
         return;
       }
@@ -54,7 +54,7 @@ function FinalOrderPage() {
       link.remove();
     } catch (error) {
       console.error('Error downloading the PDF:', error);
-      alert("Failed to download the PDF.");
+      alert("eroare la descarcarea PDF-ului!");
     }
   };
 

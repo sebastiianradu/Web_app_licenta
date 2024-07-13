@@ -17,18 +17,18 @@ function LoginPage() {
 
       if(response.status === 200){
         localStorage.setItem('token', response.data.token); // Save the token
-        alert("Welcome!");
+        alert("Bine ati venit!");
         navigate('/'); // Redirect to main page after login
         window.location.reload(); // Force reload to update account information
 
       }
       else{
-        alert("Login failed!\nIncorrect email or password. Please try again!");
+        alert("Login esuat!\nEmail sau parola incorecte, va rugam incercati din nou!");
       }
       
     } catch (error) {
       console.error('Login error:', error);
-      alert("Login failed!\nIncorrect email or password. Please try again!");
+      alert("Login esuat!\nEmail sau parola incorecte, va rugam incercati din nou!");
     }
   };
   
@@ -58,14 +58,15 @@ function LoginPage() {
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Parola"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
         <div class="buttons">
-        <button className='LogIn' type="submit">Login</button>
-        <button className='Create-Acc'type="button" onClick={handleCreateAccount}>Create Account</button> {/* Add this line */}</div>
+        <button className='LogIn' type="submit">Log in</button>
+        <p>Nu ai inca un cont? Creeaza-ti acum unul apasand pe butonul de mai jos!</p>
+        <button className='Create-Acc'type="button" onClick={handleCreateAccount}>Creare Cont</button> {/* Add this line */}</div>
       </form>
     </div>
     </div>

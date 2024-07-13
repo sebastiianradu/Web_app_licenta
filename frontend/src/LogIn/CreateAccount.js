@@ -12,6 +12,13 @@ function CreateAccountPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
+    
+    // Check if the password is at least 8 characters long
+    if (password.length < 8) {
+      alert("Parola prea scurta, numar minim de caractere: 8");
+      return; // Exit the function if the password is too short
+    }
+
     try {
       // Construct the request body
       const requestBody = {
@@ -20,19 +27,19 @@ function CreateAccountPage() {
         email,
         password,
       };
-  
+
       // Send a POST request to the backend
       const response = await axiosInstance.post('/create-account', requestBody);
       
       if (response.status === 201) {
-        alert("Account created successfully!");
+        alert("Contul dumneavoastra a fost creat cu succes!");
         navigate('/login'); // Redirect to login page after successful account creation
       } else {
-        alert("Account creation failed. Please try again!");
+        alert("Eroare la crearea contului!");
       }
     } catch (error) {
       console.error('Account creation error:', error);
-      alert("Account creation failed. Please try again!");
+      alert("Eroare la crearea contului!");
     }
   };
 
@@ -44,19 +51,19 @@ function CreateAccountPage() {
         </div>
       </header>
       <div className="create-account-container">
-        <form onSubmit={handleSubmit}> {/* Updated to use handleSubmit */}
-          <h2>Create New Account</h2>
+        <form onSubmit={handleSubmit}>
+          <h2>Creeaza-ti un nou cont acum!</h2>
           <div className="text">
           <input
             type="text"
-            placeholder="First Name"
+            placeholder="Prenume"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
           <input
             type="text"
-            placeholder="Last Name"
+            placeholder="Nume"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -70,12 +77,12 @@ function CreateAccountPage() {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Parola"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           /></div>
-          <button className='Create-Acc' type="submit">Create Account</button>
+          <button className='Create-Acc' type="submit">Creeaza cont</button>
         </form>
       </div>
     </div>

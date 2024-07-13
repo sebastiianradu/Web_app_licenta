@@ -26,8 +26,8 @@
   }
   
   .basket-item-image {
-    width: 50px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     margin-right: 10px;
   }
@@ -47,7 +47,7 @@
   .basket-checkout-button {
     padding: 10px;
     margin-top: 10px;
-    background-color: #4CAF50; /* Green background for the checkout button */
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -56,10 +56,10 @@
   }
   
   .basket-checkout-button:hover {
-    background-color: #45a049; /* Darker shade of green on hover */
+    background-color: #45a049;
   }
   
   .basket-item-image {
-    width: 150px; /* Setăm lățimea imaginii la 200px */
+    width: 150px;
   }
   

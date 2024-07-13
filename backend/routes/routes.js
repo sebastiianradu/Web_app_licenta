@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const { loginMiddleware,createAccountMiddleware,verifyToken }  = require('../middleware/authMiddleware.js'); // Update the path as per your structure
 const { Basket, BasketItem, Order, User, getUserDetailsById, getBasketItemDetails, ClothingArticle } = require('../../backend/models/userModel.js');
@@ -383,5 +384,45 @@ router.get('/api/pdf', verifyToken, async (req, res) => {
     res.status(500).json({ message: 'Error generating PDF' });
   }
 });
+
+////////////////////// ML
+
+
+
+router.post('/api/predict-price', async (req, res) => {
+  try {
+    const { articleId } = req.body;
+
+    // Fetch the article from the database
+    const article = await ClothingArticle.findByPk(articleId);
+
+    if (!article) {
+      return res.status(404).json({ message: 'Article not found' });
+    }
+
+    // Extract month and year from createdAt
+    const createdAt = new Date(article.createdAt);
+    const month = createdAt.getMonth() + 1; // getMonth() returns months from 0
+    const year = createdAt.getFullYear();
+
+    // Prepare data for prediction
+    const data = {
+      month: month,
+      year: year,
+      type_of_article: article.type,
+      category: article.category,
+      price: article.price // Include the current price of the article
+    };
+
+    // Send request to the Flask server
+    const response = await axios.post('http://127.0.0.1:5000/predict', data);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error predicting price:', error);
+    res.status(500).json({ message: 'Error predicting price' });
+  }
+});
+
+
 
 module.exports = router;

@@ -69,15 +69,13 @@ const handleSearch = (event) => {
       <main className="article-container">
         {articles
         .filter(article =>
-          article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          article.description.toLowerCase().includes(searchTerm.toLowerCase())
+          article.title.toLowerCase().includes(searchTerm.toLowerCase())
         )
         .map(article => (
           <div key={article.id} className="Main-article" onClick={() => navigate(`/article/${article.id}`)} style={{ cursor: 'pointer' }}>
             <img src={article.imageUrl} alt={article.title} style={{ width: '250px', height: 'auto' }} />
             <h3>{article.title}</h3>
-            <p>{article.description}</p>
-            <p>${article.price}</p>
+            <p>{article.price} RON</p>
           </div>
         ))}
       </main>

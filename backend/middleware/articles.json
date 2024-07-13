@@ -1,62 +1,197 @@
 [
   {
     "id": 1,
-    "title": "Adidasi 1",
-    "description": "descriere 1",
-    "price": 99.99,
+    "title": "Încălțăminte Impermeabilă joasă Drumeție la Munte MH100 Verde-Inchis Bărbați",
+    "description": "Produs conceput pentru drumeție la munte, practicare ocazională. Asigură impermeabilitate.\n\n Esențială pentru drumeție la munte. Talpă aderentă, cu față impermeabilă, cu protecție pietre integrală.",
+    "price": 249.99,
     "imageUrl": "https://contents.mediadecathlon.com/p2617670/k$9920a2027435166f5261dc522c1ea182/sq/incaltaminte-joasa-drumetie-in-natura-nh50-kaki-barbati.jpg?f=3000x3000",
     "category": "M",
     "type": "Adidasi",
-    "sizes": ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"]
+    "sizes": ["37", "38", "39", "40", "41", "42", "43", "44", "45", "46"]
   },
   {
     "id": 2,
-    "title": "Pantaloni 1",
-    "description": "descriere 2",
-    "price": 119.99,
+    "title": "Ghete Fotbal 100 TURF TF Negru Adulți",
+    "description": "Produs conceput pentru fotbal, practicare ocazională, pe teren sintetic sau natural.\n\n Ghete flexibile, rezistente în timp și accesibile. Datorită tehnologiei Inject'Up®, ghetele 100 sunt potrivite pentru fotbalul modern!",
+    "price": 89.99,
     "imageUrl": "https://contents.mediadecathlon.com/p2588643/k$943d9eb37425a7e15d033906bf9e1a8c/sq/ghete-fotbal-100-turf-tf-negru-adulti.jpg?f=3000x3000",
     "category": "M",
-    "type": "Pantaloni",
-    "sizes": ["XS", "S", "M", "L", "XL"]
+    "type": "Adidasi",
+    "sizes": ["37", "38", "39", "40", "41", "42", "43", "44", "45", "46"]
   },
   {
     "id": 3,
-    "title": "Pantaloni 2",
-    "description": "descriere 3",
-    "price": 199.99,
-    "imageUrl": "https://contents.mediadecathlon.com/p2380446/k$88bbd05387f25c2ca0de3e0eda22192d/sq/ghete-fotbal-viralto-i-mgag-negru-rosu-adulti.jpg?f=3000x3000",
-    "category": "K",
-    "type": "Pantaloni",
+    "title": "Tricou Drumeție la Munte MH500 Gri Bărbați",
+    "description": "Produs conceput pentru drumeție la munte, practicare consecventă. Tricou ușor și respirant.\n\n Confort optim datorită capacității de absorbire și evacuare a transpirației.",
+    "price": 44.99,
+    "imageUrl": "https://contents.mediadecathlon.com/p2240770/k$b7fc2a02d02e729a5bd43903576afbcb/sq/tricou-drumetie-la-munte-mh500-gri-barbati.jpg?format=auto&f=1800x1800",
+    "category": "M",
+    "type": "Tricouri",
     "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "id": 4,
-    "title": "Tricou 1",
-    "description": "descriere 4",
-    "price": 79.99,
-    "imageUrl": "https://contents.mediadecathlon.com/p2622871/k$5b2df3fcb693fbd93b5659ef7e96d24e/sq/ghete-fotbal-future-7-match-tf-puma-alb-adulti.jpg?f=3000x3000",
-    "category": "K",
+    "title": "Tricou Drumeție la Munte MH500 Bej Bărbați",
+    "description": "Produs conceput pentru drumeție la munte, practicare consecventă. Materialul permite evacuarea transpirației.\n\n Datorită materialului sintetic, acest tricou se usucă rapid.",
+    "price": 59.99,
+    "imageUrl": "https://contents.mediadecathlon.com/p2612393/k$da3d46cbea071f76c9dbe097a11f9008/sq/tricou-drumetie-la-munte-mh500-bej-barbati.jpg?format=auto&f=1800x1800",
+    "category": "M",
     "type": "Tricouri",
     "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "id": 5,
-    "title": "Adidasi 2",
-    "description": "descriere 5",
-    "price": 69.99,
-    "imageUrl": "https://contents.mediadecathlon.com/p2416495/k$42ffbb6dd26e25665fdcf0425799e3c4/sq/ghete-din-piele-futsal-eskudo-pro-202223-barbati.jpg?f=3000x3000",
-    "category": "W",
-    "type": "Adidasi",
-    "sizes": ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"]
+    "title": "Pantalon scurt Regular Drumeție în natură NH500 Bărbați",
+    "description": "Produs conceput pentru drumeţie în natură, în pădure sau pe litoral, pe vreme uscată, practicare consecventă.\n\n Motivația noastră? Pantalon scurt ușor, extensibil, din bumbac moale și poliester respirant, ce asigură libertate de mișcare! Prevăzut cu 4 buzunare, dintre care unul cu fermoar, pentru telefon.",
+    "price": 109.99,
+    "imageUrl": "https://contents.mediadecathlon.com/p2240755/k$ad7b637d255e70b2590c4e480495adc9/sq/pantalon-scurt-regular-drumetie-in-natura-nh500-barbati.jpg?format=auto&f=1800x1800",
+    "category": "M",
+    "type": "Pantaloni",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "id": 6,
-    "title": "Pantaloni 3",
-    "description": "descriere 6",
-    "price": 99.99,
-    "imageUrl": "https://contents.mediadecathlon.com/p1569733/k$85d97db145c61db79c0bb0e502178509/sq/incaltaminte-drumetie-la-munte-crosslander-gri-barbati.jpg?f=3000x3000",
-    "category": "W",
+    "title": "Șort Fotbal Adidas Squadra Albastru Adulți",
+    "description": "Produs conceput pentru antrenamentele de fotbal. Material rezisten în timp.\n\n Pe teren, ești doar tu și echipa, împotriva lumii.",
+    "price": 159.99,
+    "imageUrl": "https://contents.mediadecathlon.com/p2036287/k$a87a2ab3dca15b14be302f6aabffbecc/sq/sort-fotbal-adidas-squadra-albastru-adulti.jpg?format=auto&f=1800x1800",
+    "category": "M",
     "type": "Pantaloni",
     "sizes": ["XS", "S", "M", "L", "XL"]
-  }
+  },
+
+
+
+
+
+
+
+
+{
+  "id": 7,
+  "title": "Încălţăminte 500 FITMAX Fitness Roz Damă",
+  "description": "Produs conceput pentru antrenamente de fitness de intensitate ridicată. Asigură confort și design modern.\n\n Încălțăminte confortabilă, cu design modern. Completează ținuta sportivă!",
+  "price": 159.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2180713/k$0796d3bcd0ffff41bfff774fe22edbba/sq/incaltaminte-500-fitmax-fitness-roz-dama.jpg?format=auto&f=1800x1800",
+  "category": "W",
+  "type": "Adidasi",
+  "sizes": ["34", "35", "36", "37", "38", "39", "40", "41", "42", "43"]
+},
+{
+  "id": 8,
+  "title": "Sandale Mers sportiv ONTHEGO Roz Damă",
+  "description": "Produs conceput pentru activitățile de zi cu zi. Ideal și pentru mersul sportiv pe timp de vară.\n\n Sandale ușoare pentru a te bucura de mersul sportiv chiar și pe vreme caldă.",
+  "price": 249.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2183929/k$b56a43b1c7f51eac1a6fbf3e2df4d207/sq/sandale-mers-sportiv-onthego-roz-dama.jpg?format=auto&f=1800x1800",
+  "category": "W",
+  "type": "Adidasi",
+  "sizes": ["34", "35", "36", "37", "38", "39", "40", "41", "42", "43"]
+},
+{
+  "id": 9,
+  "title": "Tricou sport femei Record II Turcoaz",
+  "description": "Tricou sport femei Joma Record II Turcoaz ideal pentru activitati sportive intense.",
+  "price": 69.99,
+  "imageUrl": "https://contents.mediadecathlon.com/m6108597/k$db47c67b0db95d4425e4331d4fb9ed6d/sq/tricou-sport-femei-record-ii-turcoaz.jpg?format=auto&f=1800x1800",
+  "category": "W",
+  "type": "Tricouri",
+  "sizes": ["XS", "S", "M", "L", "XL"]
+},
+{
+  "id": 10,
+  "title": "Maiou Lână merinos Trekking călătorie Travel 500 Galben Damă",
+  "description": "Produs conceput pentru trekking călătorie pe timp de vară. Lâna merinos reduce apariția mirosurilor neplăcute cauzate de transpirație.\n\n Maiou din lână merinos (62%), ce poate fi purtat de-a lungul întregului sezon. Materialul asigură confort și finețe la atingere. Buzunar discret în lateral, pentru obiectele de valoare.",
+  "price": 129.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2424751/k$732a3ed4bd30610ff751a175a3494f79/sq/maiou-lana-merinos-trekking-calatorie-travel-500-galben-dama.jpg?format=auto&f=1800x1800",
+  "category": "W",
+  "type": "Tricouri",
+  "sizes": ["XS", "S", "M", "L", "XL"]
+},
+{
+  "id": 11,
+  "title": "Pantalon scurti pentru purtare pe Drumeție în natură Damă",
+  "description": "Produs conceput pentru drumeție de o zi, practicare consecventă.\n\n Potrivit pentru purtarea pe sub rochie! Rolul său este de a reduce frecarea coapselor între ele. În timpul mișcării, rochia se poate deplasa puțin, iar șortul oferă confortul de care ai nevoie.",
+  "price": 24.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2132877/k$6790d5aecbcff547c256419141cc7cd3/sq/pantalon-scurt-pentru-purtare-pe-sub-rochie-drumetie-in-natura-bleumarin-dama.jpg?format=auto&f=1800x1800",
+  "category": "W",
+  "type": "Pantaloni",
+  "sizes": ["XS", "S", "M", "L", "XL"]
+},
+{
+  "id": 12,
+  "title": "Pantalon scurt din Bumbac Trekking călătorie TRAVEL500 Roz Damă",
+  "description": "Produs conceput pentru trekking călătorie. Asigură confort.\n\n Pantalon scurt cargo, din bumbac, care asigură confort și rezistență în timpul sesiunilor de trekking călătorie.",
+  "price": 109.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2479766/k$3683ee3467346a748877969ed7b93029/sq/pantalon-scurt-din-bumbac-trekking-calatorie-travel500-roz-dama.jpg?format=auto&f=1800x1800",
+  "category": "W",
+  "type": "Pantaloni",
+  "sizes": ["XS", "S", "M", "L", "XL"]
+},
+
+
+
+
+
+
+
+{
+  "id": 13,
+  "title": "Încălțăminte Educație fizică ADIDAS TENSAUR RUN Gri-Alb-Galben Copii",
+  "description": "Produs conceput pentru educație fizică și sport, dar și pentru activitățile de zi cu zi.\n\nÎncălțăminte ideală pentru activitățile zilnice ale copilului tău. Rezistentă și confortabilă. Cu stil adidas.",
+  "price": 159.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2674724/k$64dc4ade7dd05b057d0815f7603ef801/sq/incaltaminte-educatie-fizica-adidas-tensaur-run-gri-alb-galben-copii.jpg?format=auto&f=1800x1800",
+  "category": "K",
+  "type": "Adidasi",
+  "sizes": ["26", "27", "28", "29", "30", "31", "32", "33", "34", "35"]
+},
+{
+  "id": 14,
+  "title": "Încălțăminte cu șireturi Educație fizică Playventure City Alb-Roz Copii",
+  "description": "Produs conceput pentru educație fizică și sport, dar și pentru activitățile de zi cu zi. Polivalent și ușor de încălțat!\n\nDescoperă încălțămintea noastră dezvoltată în colaborare cu 11 specialiști în sănătatea copiilor. Oferă flexibilitate, răsucire și amortizare.",
+  "price": 89.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2643522/k$481da37c67ad836ec507a674c12043c7/sq/incaltaminte-cu-sireturi-educatie-fizica-playventure-city-alb-roz-copii.jpg?format=auto&f=1800x1800",
+  "category": "K",
+  "type": "Adidasi",
+  "sizes": ["26", "27", "28", "29", "30", "31", "32", "33", "34", "35"]
+},
+{
+  "id": 15,
+  "title": "Tricou Educație fizică ADIDAS Albastru Băieți",
+  "description": "Produs conceput pentru educație fizică și sport, dar și pentru activitățile de zi cu zi.\n\nTricou din bumbac, cu croială confortabilă! Poate fi purtat oriunde, în fiecare zi.",
+  "price": 59.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2690954/k$3787329956ce15165421a26f1b34fcbd/sq/tricou-educatie-fizica-adidas-albastru-baieti.jpg?format=auto&f=1800x1800",
+  "category": "K",
+  "type": "Tricouri",
+  "sizes": ["XS", "S", "M", "L", "XL"]
+},
+{
+  "id": 16,
+  "title": "Tricou copii Puma x Spongebob Squarepants, Roz",
+  "description": "Creeaza pentru micutul tau cele mai cool tinute cu tricoul Puma x Spongebob Squarepants.",
+  "price": 82.99,
+  "imageUrl": "https://contents.mediadecathlon.com/m15735146/k$8d3cb27de61cfbf251c690457808f044/sq/tricou-copii-puma-x-spongebob-squarepants-roz.jpg?format=auto&f=1800x1800",
+  "category": "K",
+  "type": "Tricouri",
+  "sizes": ["XS", "S", "M", "L", "XL"]
+},
+{
+  "id": 17,
+  "title": "Suprapantalon Drumeție la munte MH500 Mov Copii 7-15 ani",
+  "description": "Produs conceput pentru a proteja de ploaie și vânt, în timpul drumețiilor la munte.\n\nConfortabil și reglabil! Suprapantalonul completează perfect protecția oferită de geaca impermeabilă.",
+  "price": 69.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p1760402/k$b0bc01b6fdfa53d7ef21c8ca719aa0e2/sq/suprapantalon-drumetie-la-munte-mh500-mov-copii-7-15-ani.jpg?format=auto&f=1800x1800",
+  "category": "K",
+  "type": "Pantaloni",
+  "sizes": ["XS", "S", "M", "L", "XL"]
+},
+{
+  "id": 18,
+  "title": "Pantalon de trening călduros Educație fizică Bleumarin Băieți",
+  "description": "Produs conceput pentru educație fizică și sport, dar și pentru activitățile de zi cu zi. Din molton.\n\nPantalon de trening mulat la nivelul bazinului. Croială dreaptă până la nivelul gleznei. Avantaj: Materialul interior din molton asigură confort termic înainte, în timpul şi după antrenament.",
+  "price": 24.99,
+  "imageUrl": "https://contents.mediadecathlon.com/p2712038/k$0a44b01f71c29d2b0b844d008d8367b1/sq/pantalon-de-trening-calduros-educatie-fizica-bleumarin-baieti.jpg?format=auto&f=1800x1800",
+  "category": "K",
+  "type": "Pantaloni",
+  "sizes": ["XS", "S", "M", "L", "XL"]
+}
 ]

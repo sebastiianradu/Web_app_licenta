@@ -36,18 +36,22 @@
 }
 
 .article-info {
+  font-size: 20px;
   padding: 20px;
   flex: 1; /* Take available space */
 }
 
 .article-title {
-  font-size: 24px;
+  font-size: 30px;
   margin-bottom: 10px;
 }
 
 .article-price {
-  color: grey;
+  color: rgb(213, 213, 0);
+  font-size: 25px;
   margin: 10px 0;
+  font-weight: bold;
+
 }
 
 .quantity-and-size {
@@ -87,6 +91,13 @@
   display: flex;
   justify-content: center; /* Center the button horizontally */
   width: 100%; /* Take full width of the container */
+}
+
+.button-container-prediction {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  width: 100%;
+  padding-top: 15px;
 }
 
 .add-button {

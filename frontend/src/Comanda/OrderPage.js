@@ -24,10 +24,18 @@ function OrderPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
+    // Check if the phone number consists only of digits
+    const phoneNumberPattern = /^\d+$/;
+    if (!phoneNumberPattern.test(phoneNumber)) {
+      alert('Numarul de telefon trebuie sa contina doar cifre.');
+      return; // Exit the function if the phone number is invalid
+    }
+    
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        alert('Please log in to place an order.');
+        alert('Va rugam conectati-va cu contul dumneavoastra inainte de a plasa o comanda!');
         navigate('/login');
         return;
       }
@@ -46,11 +54,11 @@ function OrderPage() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      alert("Order placed successfully!");
+      alert("Comanda dumneavoastra a fost plasata cu succes!");
       navigate('/final-order');
     } catch (error) {
       console.error('Error placing order:', error);
-      alert("Failed to place the order.");
+      alert("Eroare in plasarea comenzii!");
     }
   };
 

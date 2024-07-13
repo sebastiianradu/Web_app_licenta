@@ -140,9 +140,9 @@ function Basket() {
                 <img src={item.clothingArticle.imageUrl} alt={item.clothingArticle.title} className="basket-item-image" />
                 <div className="basket-item-details">
                   <p className="basket-item-title">{item.clothingArticle.title}</p>
-                  <p className="basket-item-price">${parseFloat(item.clothingArticle.price).toFixed(2)}</p>
-                  <p className="basket-item-quantity">Quantity: {item.quantity}</p>
-                  <p className="basket-item-size">Size: {item.clothingArticle.sizes}</p>
+                  <p className="basket-item-price">{parseFloat(item.clothingArticle.price).toFixed(2)} RON</p>
+                  <p className="basket-item-quantity">Cantitate: {item.quantity}</p>
+                  <p className="basket-item-size">Marime: {item.clothingArticle.sizes}</p>
                   <button className="remove-item-button" onClick={() => handleRemoveItem(item.id)}>Șterge</button>
                 </div>
               </div>
@@ -153,7 +153,7 @@ function Basket() {
         </div>
         <div className="basket-summary">
           <h2>Sumar comandă:</h2>
-          <p>Total: ${total.toFixed(2)}</p>
+          <p>Total: {total.toFixed(2)} RON</p>
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           <button className="basket-checkout-button" onClick={handleCheckout}>Către livrare</button>
         </div>
