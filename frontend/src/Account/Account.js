@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../AxiosInstance'; // Adjust the import path as necessary
+import axiosInstance from '../AxiosInstance'; 
 import './Account.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for redirection
+import { useNavigate } from 'react-router-dom'; 
 
 const Account = () => {
   const [userDetails, setUserDetails] = useState({
@@ -10,9 +10,9 @@ const Account = () => {
     email: '',
   });
 
-  const navigate = useNavigate(); // Hook for navigating to different routes
+  const navigate = useNavigate(); 
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
   
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -25,7 +25,6 @@ const Account = () => {
         });
       } catch (error) {
         console.error('Error fetching user details:', error);
-        // Handle error, e.g., redirect to login if unauthorized
       }
     };
 
@@ -33,24 +32,21 @@ const Account = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove the token from storage
-    navigate('/login'); // Redirect user to login page
-    // You could also redirect to the home page or another page if you prefer
+    localStorage.removeItem('token'); 
+    navigate('/login'); 
   };
 
    
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
+    setIsMenuOpen(!isMenuOpen); 
   };
 
-// Function to handle Account button click
 const handleAccountClick = () => {
-  // Check if the JWT token exists in local storage
   const token = localStorage.getItem('token');
   if (token) {
-    navigate('/account'); // If logged in, navigate to the Account page
+    navigate('/account'); 
   } else {
-    navigate('/login'); // If not logged in, navigate to the Login page
+    navigate('/login'); 
   }
 };
   return (

@@ -53,7 +53,7 @@ const ClothingArticle = sequelize.define('ClothingArticle', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isUrl: true // This validates the imageUrl field to ensure it contains a valid URL
+      isUrl: true 
     }
   },
   category: {
@@ -113,7 +113,7 @@ const BasketItem = sequelize.define('BasketItem', {
     type: Sequelize.STRING,
     allowNull: true
   },
-  orderId: {  // Adăugat coloana orderId
+  orderId: {  // Adaugat coloana orderId
     type: Sequelize.UUID,
     allowNull: true,
     references: {
@@ -144,7 +144,7 @@ const Order = sequelize.define('Order', {
   }
 });
 
-// Relationships
+
 User.hasOne(Basket);
 Basket.belongsTo(User);
 
@@ -157,8 +157,8 @@ BasketItem.belongsTo(ClothingArticle);
 User.hasMany(Order);
 Order.belongsTo(User);
 
-Order.hasMany(BasketItem); // Order are mai multe BasketItems
-BasketItem.belongsTo(Order); // BasketItem aparține unui Order
+Order.hasMany(BasketItem); 
+BasketItem.belongsTo(Order); 
 
 async function initialize() {
   await sequelize.authenticate();
@@ -169,18 +169,18 @@ async function getUserDetailsById(userId) {
   try {
     const user = await User.findOne({
       where: { id: userId },
-      attributes: ['firstName', 'lastName', 'email'], // Only fetch these attributes
+      attributes: ['firstName', 'lastName', 'email'], 
     });
 
     if (!user) {
       console.log('User not found');
-      return null; // Or handle as per your application's needs
+      return null; 
     }
 
-    return user.dataValues; // Returns the user details
+    return user.dataValues; 
   } catch (error) {
     console.error('Error fetching user by ID:', error);
-    throw error; // Rethrow or handle error as needed
+    throw error;
   }
 }
 

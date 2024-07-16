@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { User } = require('./user.js'); // Assuming this is where your Sequelize User model is defined
+const { User } = require('./user.js'); 
 
 const loginRouter = express.Router();
 
@@ -18,8 +18,7 @@ loginRouter.post('/api/login', async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // If credentials are correct, you can proceed with redirecting or generating a session/token
-    // For simplicity, we're just sending a success message
+   
     return res.status(200).json({ message: "Login successful" });
 
   } catch (error) {

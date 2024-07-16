@@ -6,7 +6,6 @@ import numpy as np
 app = Flask(__name__)
 CORS(app)
 
-# Încarcă modelul și scaler-ul din fișiere
 with open('price_prediction_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
@@ -21,14 +20,11 @@ def predict():
         type_of_article_columns = ['type_of_article_Adidasi', 'type_of_article_Pantaloni', 'type_of_article_Tricouri']
         category_columns = ['category_M', 'category_W', 'category_K']
         
-        # Construiți input-ul în același mod în care a fost construit la antrenare
         input_data = [data['month'], data['year']]
         
-        # Adăugați 0 pentru fiecare tip de articol și 1 doar pentru tipul curent
         for col in type_of_article_columns:
             input_data.append(1 if col == f"type_of_article_{data['type_of_article']}" else 0)
         
-        # Adăugați 0 pentru fiecare categorie și 1 doar pentru categoria curentă
         for col in category_columns:
             input_data.append(1 if col == f"category_{data['category']}" else 0)
         

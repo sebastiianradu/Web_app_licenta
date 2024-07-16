@@ -25,19 +25,18 @@ function Barbati() {
     setFilters({ ...filters, [name]: value });
   };
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // 
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
+    setIsMenuOpen(!isMenuOpen); // 
   };
 
-  // Function to handle Account button click
   const handleAccountClick = () => {
     const token = localStorage.getItem('token');
     if (token) {
-      navigate('/account'); // If logged in, navigate to the Account page
+      navigate('/account'); 
     } else {
-      navigate('/login'); // If not logged in, navigate to the Login page
+      navigate('/login'); 
     }
   };
 
@@ -49,18 +48,15 @@ function Barbati() {
   const filterArticles = () => {
     let filtered = articles;
   
-    // Filter by type
     if (filters.type !== '') {
       filtered = filtered.filter(article => article.type === filters.type);
     }
   
-    // Filter by price range
     if (filters.priceRange !== '') {
       const [minPrice, maxPrice] = filters.priceRange.split('-').map(Number);
       filtered = filtered.filter(article => article.price >= minPrice && article.price <= maxPrice);
     }
   
-    // Filter by search term
     if (searchTerm !== '') {
       filtered = filtered.filter(article =>
         article.title.toLowerCase().includes(searchTerm.toLowerCase())

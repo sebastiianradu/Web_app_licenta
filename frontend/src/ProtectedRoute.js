@@ -27,23 +27,20 @@ const ProtectedRoute = ({ children }) => {
         // If an error occurs, assume the token is invalid or expired
         setIsAuthenticated(false);
       }
-      setAuthChecked(true); // Auth check completed
+      setAuthChecked(true); 
     };
 
     verifyTokenAndSetAuth();
   }, []);
 
   if (!authChecked) {
-    // Authentication check is in progress, show nothing or a loading indicator
-    return null; // or <LoadingSpinner />
+    return null; 
   }
 
   if (!isAuthenticated) {
-    // User is not authenticated, redirect to login page
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // User is authenticated, render the protected route's children
   return children;
 };
 

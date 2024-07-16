@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { User, ClothingArticle } = require('../../backend/models/userModel'); // Update the path as per your structure
+const { User, ClothingArticle } = require('../../backend/models/userModel'); 
 
 const loginMiddleware = async (req, res, next) => {
   const { email, password } = req.body;
@@ -15,23 +15,22 @@ const loginMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Attach user to request object if needed later
     req.user = user;
 
-    next(); // Proceed to the next middleware or route handler
+    next(); 
   } catch (error) {
     console.error('Login error:', error);
     return res.status(500).json({ message: "Server error" });
   }
 };
 
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------- Hash pass:
 
 const createAccountMiddleware = async (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10); 
 
     const newUser = await User.create({
       firstName,
@@ -40,10 +39,9 @@ const createAccountMiddleware = async (req, res, next) => {
       password: hashedPassword,
     });
 
-    // Attach newUser to request object if needed later
     req.newUser = newUser;
 
-    next(); // Proceed to the next middleware or route handler
+    next(); 
   } catch (error) {
     console.error('Error creating account:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -52,7 +50,7 @@ const createAccountMiddleware = async (req, res, next) => {
 
 //----------------------------------------------------------------------------
 
-const fs = require('fs').promises; // Use fs.promises for async/await support
+const fs = require('fs').promises;
 const path = require('path');
 
 async function addClothingArticle(title, description, price, imageUrl, category, type, sizes) {
@@ -64,7 +62,7 @@ async function addClothingArticle(title, description, price, imageUrl, category,
       imageUrl,
       category,
       type,
-      sizes  // Adăugăm mărimile
+      sizes 
     });
     console.log('Article added:', article.toJSON());
   } catch (error) {
@@ -74,7 +72,7 @@ async function addClothingArticle(title, description, price, imageUrl, category,
 
 async function addAllClothingArticles() {
   try {
-    const articlesPath = path.join(__dirname, '../middleware/articles.json'); // Adjust the path as necessary
+    const articlesPath = path.join(__dirname, '../middleware/articles.json');
     const articlesData = await fs.readFile(articlesPath, 'utf8');
     const articles = JSON.parse(articlesData);
 

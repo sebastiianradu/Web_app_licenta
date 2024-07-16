@@ -7,7 +7,7 @@ function OrderPage() {
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('cash');
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
   const navigate = useNavigate();
 
   const handleAddressChange = (event) => {
@@ -25,11 +25,10 @@ function OrderPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     
-    // Check if the phone number consists only of digits
     const phoneNumberPattern = /^\d+$/;
     if (!phoneNumberPattern.test(phoneNumber)) {
       alert('Numarul de telefon trebuie sa contina doar cifre.');
-      return; // Exit the function if the phone number is invalid
+      return; 
     }
     
     try {
@@ -49,7 +48,6 @@ function OrderPage() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Clear the basket after placing the order
       await axios.delete('http://localhost:3001/api/basket/clear', 
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -63,16 +61,15 @@ function OrderPage() {
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
+    setIsMenuOpen(!isMenuOpen); 
   };
 
   const handleAccountClick = () => {
-    // Check if the JWT token exists in local storage
     const token = localStorage.getItem('token');
     if (token) {
-      navigate('/account'); // If logged in, navigate to the Account page
+      navigate('/account'); 
     } else {
-      navigate('/login'); // If not logged in, navigate to the Login page
+      navigate('/login'); 
     }
   };
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
-const { loginMiddleware,createAccountMiddleware,verifyToken }  = require('../middleware/authMiddleware.js'); // Update the path as per your structure
+const { loginMiddleware,createAccountMiddleware,verifyToken }  = require('../middleware/authMiddleware.js');
 const { Basket, BasketItem, Order, User, getUserDetailsById, getBasketItemDetails, ClothingArticle } = require('../../backend/models/userModel.js');
 const router = express.Router();
 const fs = require('fs');
@@ -18,33 +18,15 @@ router.post('/api/login', loginMiddleware, (req, res) => {
 });
 
 router.post('/api/create-account', createAccountMiddleware, (req, res) => {
-    const { id } = req.newUser; // newUser was attached to the req object in the middleware
+    const { id } = req.newUser; 
     res.status(201).json({ message: 'Account created successfully', userId: id });
 });
-
-/////////////////////// main page ///////////////////////
-
-
-
-// const articles = [
-//     { id: 1, title: 'Running Shoes', description: 'High-quality running shoes.', price: 100 },
-//     { id: 2, title: 'Yoga Mat', description: 'Eco-friendly yoga mat.', price: 50 },
-//     // Add more articles as needed
-//   ];
-
-
-// // Temporary data for articles
-// router.get('/api/articles', (req, res) => {
-//     res.json(articles);
-//   });
 
 
 //////////////////////// JWT /////////////////////////////
 
 router.get('/api/user/details', verifyToken, async (req, res) => {
     try {
-      // Assuming you have a method to find a user by ID
-      // The user ID should be stored in req.user.id based on the JWT verification
       const userDetails = await getUserDetailsById(req.user.id);
       if (userDetails) {
         res.json(userDetails);
@@ -62,7 +44,7 @@ router.get('/api/user/details', verifyToken, async (req, res) => {
 
 router.post('/api/auth/verify-token', (req, res) => {
   const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1]; // Get the token from the Authorization header
+  const token = authHeader && authHeader.split(' ')[1]; 
   
   if (!token) {
     return res.status(401).send("No token provided.");
@@ -74,13 +56,11 @@ router.post('/api/auth/verify-token', (req, res) => {
     }
 
     try {
-      // Fetch user details from the database using the decoded ID
       const user = await getUserDetailsById(decoded.id);
       if (!user) {
         return res.status(404).send("User not found.");
       }
 
-      // Respond with the user details
       res.json({
         id: user.id,
         firstName: user.firstName,
@@ -95,7 +75,7 @@ router.post('/api/auth/verify-token', (req, res) => {
 });
 
 
-/////////////////////////////// articles /////////////////////////////////
+/////////////////////////////// articole /////////////////////////////////
 
 router.get('/api/articles', async (req, res) => {
   try {
@@ -135,14 +115,11 @@ router.post('/api/basket', verifyToken, async (req, res) => {
   const { articleId, quantity, size} = req.body;
 
   try {
-    // Find or create a basket for the user
     let basket = await Basket.findOne({ where: { userId } });
     if (!basket) {
-      // Dacă nu există un coș pentru utilizator, creează-l
       basket = await Basket.create({ userId });
     }
 
-    // Adaugă articolul în coș
     const basketItem = await BasketItem.create({
       basketId: basket.id,
       clothingArticleId: articleId,
@@ -189,10 +166,9 @@ router.get('/api/basket', verifyToken, async (req, res) => {
       return res.status(404).json({ message: 'Basket not found' });
     }
 
-    // Check if basket is not null and has items
     if (basket.BasketItems && basket.BasketItems.length > 0) {
       const formattedItems = basket.BasketItems.map(item => {
-        if (item && item.ClothingArticle) { // Check if item and item.ClothingArticle are not null
+        if (item && item.ClothingArticle) { 
           return {
             id: item.id,
             quantity: item.quantity,
@@ -205,9 +181,9 @@ router.get('/api/basket', verifyToken, async (req, res) => {
             }
           };
         } else {
-          return null; // Return null for invalid items
+          return null; 
         }
-      }).filter(item => item !== null); // Filter out null items
+      }).filter(item => item !== null); 
       res.json(formattedItems);
       console.log(formattedItems);
     } else {
@@ -222,20 +198,16 @@ router.get('/api/basket', verifyToken, async (req, res) => {
 
 router.delete('/api/basket', verifyToken, async (req, res) => {
   const userId = req.user.id;
-  const { itemId } = req.body; // Se așteaptă ID-ul elementului care trebuie șters în corpul cererii DELETE
-
+  const { itemId } = req.body; 
   try {
-    // Caută coșul de cumpărături al utilizatorului
     const basket = await Basket.findOne({ where: { userId } });
 
     if (!basket) {
       return res.status(404).json({ message: 'Basket not found' });
     }
 
-    // Șterge elementul din coșul de cumpărături
     await BasketItem.destroy({ where: { id: itemId, BasketId: basket.id } });
 
-    // Returnează un răspuns de succes
     res.status(200).json({ message: 'Item removed from basket successfully' });
   } catch (error) {
     console.error('Error removing item from basket:', error);
@@ -248,11 +220,11 @@ router.get('/api/search', async (req, res) => {
   try {
       const searchTerm = req.query.term;
 
-      // Read the contents of the articles.json file
+      
       const jsonData = await fs.readFile('articles.json', 'utf8');
       const articles = JSON.parse(jsonData);
 
-      // Search for articles based on the search term
+      
       const filteredArticles = articles.filter(article =>
           article.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
@@ -266,11 +238,9 @@ router.get('/api/search', async (req, res) => {
 
 ////////////////////////////// ORDER //////////////////////////////////////
 
-// Definim ruta pentru pagina de comandă
 router.post('/api/orders', async (req, res) => {
   try {
 
-    // Extragem datele necesare din corpul cererii
     const { address, phoneNumber, paymentMethod } = req.body;
 
     console.log('Received order data:', {
@@ -279,23 +249,20 @@ router.post('/api/orders', async (req, res) => {
       paymentMethod: paymentMethod
     });
 
-    // Creăm o nouă înregistrare în tabelul Orders
     const newOrder = await Order.create({
       address: address,
       phoneNumber: phoneNumber,
       paymentMethod: paymentMethod
     });
 
-    // Returnăm un răspuns de succes cu detaliile comenzii create
     res.status(201).json({ message: 'Order placed successfully', order: newOrder });
   } catch (error) {
-    // Dacă apar erori, returnăm un mesaj de eroare și statusul corespunzător
     console.error('Error placing order:', error.message);
     res.status(500).json({ message: 'Error placing order', error: error.message });
   }
 });
 
-//////////////////////////// Endpoint to clear the entire basket ////////////////////////////
+//////////////////////////// Endpoint pt a goli cosul ////////////////////////////
 
 
 router.delete('/api/basket/clear', verifyToken, async (req, res) => {
@@ -317,7 +284,6 @@ router.delete('/api/basket/clear', verifyToken, async (req, res) => {
 
 ////////////////////////// PDF ///////////////////////////
 
-// Endpoint to generate PDF with order details
 router.get('/api/pdf', verifyToken, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -336,7 +302,6 @@ router.get('/api/pdf', verifyToken, async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Check if the directory exists, if not, create it
     const pdfDir = path.join(__dirname, '..', 'pdfs');
     if (!fs.existsSync(pdfDir)) {
       fs.mkdirSync(pdfDir);
@@ -367,25 +332,24 @@ router.get('/api/pdf', verifyToken, async (req, res) => {
     doc.end();
     console.log(`PDF created at ${filePath}`);
 
-    // Add a delay to ensure the file is written before attempting to download
     setTimeout(() => {
       res.download(filePath, `user-${userId}-order.pdf`, (err) => {
         if (err) {
           console.error('Error downloading the PDF:', err);
           res.status(500).json({ message: 'Error downloading the PDF' });
         } else {
-          fs.unlinkSync(filePath); // Delete the file after download
+          fs.unlinkSync(filePath); 
           console.log(`PDF ${filePath} deleted after download.`);
         }
       });
-    }, 2000); // 2 seconds delay
+    }, 2000); 
   } catch (error) {
     console.error('Error generating PDF:', error);
     res.status(500).json({ message: 'Error generating PDF' });
   }
 });
 
-////////////////////// ML
+////////////////////// ML ////////////////////////////
 
 
 
@@ -393,28 +357,24 @@ router.post('/api/predict-price', async (req, res) => {
   try {
     const { articleId } = req.body;
 
-    // Fetch the article from the database
     const article = await ClothingArticle.findByPk(articleId);
 
     if (!article) {
       return res.status(404).json({ message: 'Article not found' });
     }
 
-    // Extract month and year from createdAt
     const createdAt = new Date(article.createdAt);
-    const month = createdAt.getMonth() + 1; // getMonth() returns months from 0
+    const month = createdAt.getMonth() + 1; 
     const year = createdAt.getFullYear();
 
-    // Prepare data for prediction
     const data = {
       month: month,
       year: year,
       type_of_article: article.type,
       category: article.category,
-      price: article.price // Include the current price of the article
+      price: article.price 
     };
 
-    // Send request to the Flask server
     const response = await axios.post('http://127.0.0.1:5000/predict', data);
     res.json(response.data);
   } catch (error) {

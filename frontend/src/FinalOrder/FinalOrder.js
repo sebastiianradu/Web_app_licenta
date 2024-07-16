@@ -8,22 +8,20 @@ function FinalOrderPage() {
   const location = useLocation();
   const { user } = location.state || { user: { firstName: '', lastName: '' } };
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
+    setIsMenuOpen(!isMenuOpen); 
   };
 
-  // Function to handle Account button click
   const handleAccountClick = () => {
-    // Check if the JWT token exists in local storage
     const token = localStorage.getItem('token');
     if (token) {
-      navigate('/account'); // If logged in, navigate to the Account page
+      navigate('/account'); 
     } else {
-      navigate('/login'); // If not logged in, navigate to the Login page
+      navigate('/login'); 
     }
   };
 

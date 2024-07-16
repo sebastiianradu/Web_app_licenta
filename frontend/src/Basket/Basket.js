@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 function Basket() {
   const [basketItems, setBasketItems] = useState([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
-  const [isLoading, setIsLoading] = useState(true); // State to manage loading state
-  const [errorMessage, setErrorMessage] = useState(''); // State to manage error messages
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [isLoading, setIsLoading] = useState(true); 
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ function Basket() {
         const token = localStorage.getItem('token');
         if (!token) {
           console.error('No token found. User must be logged in to fetch basket items.');
-          setIsLoading(false); // Stop loading
+          setIsLoading(false); 
           return;
         }
 
@@ -27,16 +27,16 @@ function Basket() {
 
         if (response.data.length === 0) {
           console.log('The basket is empty.');
-          setIsLoading(false); // Stop loading
+          setIsLoading(false); 
           return;
         }
 
-        console.log('Basket items fetched:', response.data); // Debugging line
+        console.log('Basket items fetched:', response.data); 
         setBasketItems(response.data);
-        setIsLoading(false); // Stop loading
+        setIsLoading(false); 
       } catch (error) {
         console.error('Error fetching basket items:', error);
-        setIsLoading(false); // Stop loading
+        setIsLoading(false); 
       }
     };
 
@@ -44,16 +44,15 @@ function Basket() {
   }, []);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
+    setIsMenuOpen(!isMenuOpen); 
   };
 
   const handleAccountClick = () => {
-    // Check if the JWT token exists in local storage
     const token = localStorage.getItem('token');
     if (token) {
-      navigate('/account'); // If logged in, navigate to the Account page
+      navigate('/account'); 
     } else {
-      navigate('/login'); // If not logged in, navigate to the Login page
+      navigate('/login'); 
     }
   };
 
@@ -65,10 +64,8 @@ function Basket() {
     return total;
   };
 
-  // Calculate total
   const total = calculateTotal(basketItems);
 
-  // Show loading message
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -83,10 +80,9 @@ function Basket() {
 
       await axios.delete('http://localhost:3001/api/basket', {
         headers: { Authorization: `Bearer ${token}` },
-        data: { itemId } // Send item ID in the DELETE request body
+        data: { itemId } 
       });
 
-      // Update the basket items after deletion
       const updatedBasketItems = basketItems.filter(item => item.id !== itemId);
       setBasketItems(updatedBasketItems);
     } catch (error) {
@@ -98,14 +94,14 @@ function Basket() {
     const token = localStorage.getItem('token');
     if (!token) {
       alert("Nu sunteti conectat la contul dumneavoastra!\nVa rugam conectati-va si incercati din nou!")
-      navigate('/login'); // If not logged in, navigate to the Login page
+      navigate('/login'); 
       return;
     }
     if (basketItems.length === 0) {
       setErrorMessage('Coșul tău este gol.');
       return;
     }
-    navigate('/orders'); // If logged in and basket is not empty, navigate to the Orders page
+    navigate('/orders');
   };
 
   return (

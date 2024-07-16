@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './Article.css'; // Assuming you have or will create CSS for this component
+import './Article.css'; 
 import { useNavigate } from 'react-router-dom';
 
 function Article() {
@@ -93,7 +93,7 @@ function Article() {
   const handlePredictPrice = () => {
     const data = {
       articleId: article.id,
-      price: article.price // Include the current price of the article
+      price: article.price 
     };
   
     axios.post('http://localhost:3001/api/predict-price', data)

@@ -12,14 +12,13 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Perform the login operation here with the backend
       const response = await axiosInstance.post('/login', { email, password });
 
       if(response.status === 200){
-        localStorage.setItem('token', response.data.token); // Save the token
+        localStorage.setItem('token', response.data.token); 
         alert("Bine ati venit!");
-        navigate('/'); // Redirect to main page after login
-        window.location.reload(); // Force reload to update account information
+        navigate('/'); 
+        window.location.reload(); 
 
       }
       else{
@@ -34,7 +33,7 @@ function LoginPage() {
   
 
   const handleCreateAccount = () => {
-    navigate('/create-account'); // Redirect to create account page
+    navigate('/create-account'); 
   };
 
 

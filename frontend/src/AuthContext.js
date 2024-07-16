@@ -23,10 +23,10 @@ export const AuthProvider = ({ children }) => {
       }
   
       const userDetails = await response.json();
-      return userDetails; // Return the user details on successful verification
+      return userDetails;
     } catch (error) {
       console.error('Error verifying token:', error);
-      return null; // Indicate failure
+      return null;
     }
   }
 
@@ -38,8 +38,7 @@ export const AuthProvider = ({ children }) => {
         if (userDetails) {
           setCurrentUser(userDetails);
         } else {
-          // Token is not valid or did not verify correctly
-          localStorage.removeItem('token'); // Consider removing the token if invalid
+          localStorage.removeItem('token'); 
           setCurrentUser(null);
         }
       });
@@ -50,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     setAuthToken(token);
-    localStorage.setItem('token', token); // Store token for session persistence
+    localStorage.setItem('token', token); 
   };
 
   const logout = () => {
@@ -58,7 +57,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
-  // Function to update currentUser upon login/logout
   const value = {
     currentUser,
     setCurrentUser,

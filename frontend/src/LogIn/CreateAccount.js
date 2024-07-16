@@ -11,16 +11,14 @@ function CreateAccountPage() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
     
-    // Check if the password is at least 8 characters long
     if (password.length < 8) {
       alert("Parola prea scurta, numar minim de caractere: 8");
-      return; // Exit the function if the password is too short
+      return; 
     }
 
     try {
-      // Construct the request body
       const requestBody = {
         firstName,
         lastName,
@@ -28,12 +26,11 @@ function CreateAccountPage() {
         password,
       };
 
-      // Send a POST request to the backend
       const response = await axiosInstance.post('/create-account', requestBody);
       
       if (response.status === 201) {
         alert("Contul dumneavoastra a fost creat cu succes!");
-        navigate('/login'); // Redirect to login page after successful account creation
+        navigate('/login'); 
       } else {
         alert("Eroare la crearea contului!");
       }
